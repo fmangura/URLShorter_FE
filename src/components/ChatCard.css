@@ -1,0 +1,62 @@
+.compact-true {
+    display:flex; 
+    flex-direction:row;
+    padding-left: 15px;
+    padding-right: 5px;
+
+    height: 30px;
+
+    color: white;
+    text-align: start;
+    align-items: center;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.compact-false {
+    display:flex; 
+    flex-direction:row;
+    padding-left: 15px;
+    padding-right: 5px;
+
+    height: 100%;
+
+    color: white;
+    text-align: start;
+    align-items: center;
+}
+
+.nickname {
+    font-size: 12px;
+}
+
+.link-name {
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    min-width: 45%;
+}
+
+.linkCard a {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.icon {
+    font-size: 12px;
+}
+
+.i-expand {
+    color: #888d975a;
+}
+
+.i-expand:hover {
+    color: default;
+}
+
+.active-false {
+    color: #FF2C2C;
+}
+
+.active-true {
+    color: #00cf00;
+}
