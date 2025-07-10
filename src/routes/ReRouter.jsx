@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import backend from '../api';
 
+import './ReRouter.css';
+
 export default function ReRouter() {
     const navigate = useNavigate();
     const {short} = useParams();
@@ -24,6 +26,7 @@ export default function ReRouter() {
                 if (time <= 0) {
                     clearInterval(timer);
                     document.location.href = longURL.long_url;
+                    return
                 }
                 time = time - 1
                 setSeconds(time);
@@ -43,8 +46,12 @@ export default function ReRouter() {
                 <h1>You are about to be routed to:</h1>
                 <h2>{longURL.long_url}</h2>
                 <h6>in {`${seconds}`}s</h6>
-
-                <p>Please if you do not recognize this link, select "Do Not Trust"</p>
+                <div className='msg-container'>
+                    <p>{longURL.msg}</p>
+                </div>
+                <div className='warning-container'>
+                    <p>Please if you do not recognize this link, select "Do Not Trust"</p>
+                </div>
             </div>
         }
         </>

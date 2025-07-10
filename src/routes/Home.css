@@ -4,11 +4,21 @@ body {
     flex-direction: row;
 
     background-color: #071526;
+    
+}
+
+.home-icon {
+    display: flex;
+    width: 100%;
+
+    justify-content: center;
+    flex-direction: row;
 }
 
 .box-1 {
     display: flex;
     flex-direction: row-reverse;
+    justify-content: center;
     width: 80vw;
     height: 60vh;
     padding: 20px;
@@ -16,12 +26,16 @@ body {
 
 .box-form {
     width: 40%;
-    padding: 5px 10px;
+    padding: 20px 10px;
     margin: 10px;
     border: solid 2px #525967;
     border-radius: 25px;
 
+    width: 500px;
+    min-width: 500px;
+
     background-color: #071526;
+    overflow: hidden;
 }
 
 .box-form h1 {
@@ -33,17 +47,21 @@ body {
     text-align: center;
 }
 
-.box-form button {
+.button-container button {
     background-color: #6c94ff;
     border-radius: 12px;
     padding: 5px 12px;
 
-    width: auto;
-    height: 30px;
+    width: 100%;
+    height: 40px;
 
     text-align: center;
-    font-size: 14px;
+    font-size: 20px;
     color: #071526;
+}
+
+.box-form button:hover {
+    background-color: #4e7cf8;
 }
 
 .box-dial {
@@ -75,7 +93,8 @@ body {
 .box-linkList {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 500px;
+    min-width: 500px;
 
     justify-content: center;
 
@@ -95,66 +114,6 @@ body {
     margin-bottom: 10px;
 }
 
-.convertInput {
-    width: 100%;
-}
-
-#url-input {
-    width: 90%;
-    height: 30px;
-
-    background-color: rgb(32, 42, 59);
-    border: #202a3b;
-    border-radius: 50px;
-
-    font-size: 14px;
-    padding: 4px 12px;
-    color: #888d97;
-}
-
-#tag-input {
-    width: 70%;
-    height: 30px;
-
-    background-color: rgb(32, 42, 59);
-    border: #202a3b;
-    border-radius: 50px;
-
-    font-size: 14px;
-    padding: 4px 12px;
-    color: #888d97;
-}
-
-#timer-input {
-    height: 30px;
-
-    background-color: rgb(32, 42, 59);
-    border: #202a3b;
-    border-radius: 50px;
-
-    font-size: 14px;
-    padding: 4px 12px;
-    color: #888d97;
-}
-
-#msg-input {
-    width: 90%;
-    height: 100px;
-    
-    text-align: start;
-
-    margin-top: 50px;
-    padding: 5px 10px;
-
-    background-color: rgb(32, 42, 59);
-    border: #202a3b;
-    border-radius: 15px;
-
-    font-size: 14px;
-    color: #888d97;
-
-    resize: none;
-}
 
 .allLinks {
     height: 100%;
@@ -162,6 +121,7 @@ body {
     display: block;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .no-links {
@@ -202,3 +162,97 @@ body {
 .grid-4 {
     width: 10%;
 }
+
+.highlight {
+    background-color: #6c94ff;
+}
+
+.animating-true {
+    background-color:  #071526;
+    position: absolute;
+    align-content: center;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%,-50%);
+
+
+    width: 100%;
+    height: 100%;
+
+    animation: 10s slide-out 10s;
+}
+
+.animating-false {
+    animation-name: slide-out;
+    animation-duration: 10s;
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0%);
+    }
+    to {
+      transform: translateY(100%);
+    }
+}
+
+.pop-corn {
+    width: 100%;
+    text-align: center;
+    position:absolute;
+    z-index: 100;
+    top: 10%;
+
+    transform: translate(-50%,-50%);
+    color: #6c94ff;
+}
+
+.popping-true-left {
+    animation: popping-left 0.8s ease-out;
+}
+
+.popping-true-right {
+    animation: popping-right 0.8s ease-out;
+}
+
+@keyframes popping-right {
+    0% {
+        transform: translate(0%);
+    }
+    20% {
+        transform: translate(30px, -60px);
+    }
+    50% {
+        transform: translate(35px, -60px);
+    }
+    70% {
+        transform: translate(45px, -25px);
+        opacity: 0.2;
+    }
+    100% {
+        transform: translate(45px, -25px);
+        opacity: 0;
+    }
+}
+    @keyframes popping-left {
+        0% {
+            transform: translate(0%);
+        }
+        20% {
+            transform: translate(-60px, -60px);
+        }
+        50% {
+            transform: translate(-65px, -60px);
+        }
+        70% {
+            transform: translate(-70px, -25px);
+            opacity: 0.2;
+        }
+        100% {
+            transform: translate(-70px, -25px);
+            opacity: 0;
+        }
+}
+

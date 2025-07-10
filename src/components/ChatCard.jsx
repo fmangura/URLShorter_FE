@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { SessionContext } from '../context'
 import Timer from '../helpers/timer'
 const APP_URL = process.env.VITE_APP_URL
 import './ChatCard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCopy, faCircle, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
-import LinkCard from './linkCard'
+import { faCopy, faCircle, faUpRightAndDownLeftFromCenter, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export default function ChatCard({data, ifCompact}) {
+export default function ChatCard({data}) {
     const {long_url, 
         short_url, 
         expiry, 
@@ -14,12 +14,15 @@ export default function ChatCard({data, ifCompact}) {
         msg,
         tag } = data;
 
+    const { handleDel, makePop } = useContext(SessionContext);
+
     const [isCompact, setIsCompact] = useState(true);
     const [status, setStatus] = useState(true);
     const [shortLink, setShortLink] = useState(`${APP_URL}${short_url}`);
 
     async function copyTitle() {
-        await navigator.clipboard.writeText(shortLink)
+        makePop()
+        await navigator.clipboard.writeText(shortLink);
     }
 
     const isActive = (stat) => {
@@ -32,10 +35,8 @@ export default function ChatCard({data, ifCompact}) {
             
     return (
         <>
-            {!isCompact ?
-                <LinkCard data={data} expandCard={expandCard} shortLink={shortLink} isActive={isActive}/>
-            :
-            <div className={`linkCard compact-${isCompact}`}>
+        <div className={`link-container compact-${isCompact}`}>
+            <div className={`linkCard`}>
                 <div className='link-copy grid-1' style={{display:'flex', flexDirection:'row'}}> 
                     <div className='link-name'>{shortLink}</div>
                     <a onClick={copyTitle}>
@@ -49,8 +50,21 @@ export default function ChatCard({data, ifCompact}) {
                     <FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter} className='icon'/>
                 </a>
             </div>
-            }
+            {!isCompact ? 
+                <div style={{display:'flex', flexDirection:'column'}}>
+                    <div className='og-link'>
+                        <p className='tab'>Original Link:</p>
+                        <p className='longurl'>{long_url}</p>
+                    </div>
+                    <div className='og-link'>
+                        <p className='tab'>Msg:</p>
+                        <p className='longurl'>{msg}</p>
+                    </div>
+                    <a onClick={() => handleDel(short_url)} style={{alignSelf:'end', fontSize:'12px', cursor:'pointer', paddingRight:'20px'}}><FontAwesomeIcon icon={faTrash} className='icon'/></a>
+                </div>
+            :
+             <></>}
+        </div>
         </>
-
     )
 }

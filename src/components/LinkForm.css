@@ -1,0 +1,208 @@
+.convertInput {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.form-input {
+    background-color: rgb(32, 42, 59);
+    border: #202a3b;
+    border-radius: 10px;
+
+    font-size: 14px;
+    padding: 4px 12px;
+    color: #888d97;
+}
+
+.err-true {
+    border: solid 2px #ff2c2c;
+}
+
+#url-input {
+    width: 90%;
+    height: 100px;
+    
+    text-align: start;
+    padding: 5px 10px;
+
+    resize: none;
+}
+
+#tag-input {
+    width: 70%;
+    height: 30px;
+}
+
+#timer-input {
+    height: 30px;
+    width: 10%;
+}
+
+#msg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+#msg-container small {
+    width: 90%;
+    text-align: end;
+}
+
+#msg-input {
+    width: 90%;
+    height: 100px;
+    
+    text-align: start;
+
+    padding: 5px 10px;
+
+    resize: none;
+}
+
+.captcha-container {
+    display: flex;
+    justify-content: center;
+    transform: scale(0.70);
+}
+
+.button-container {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.animate-false {
+    animation: slide-up 0.5s ease-out;
+}
+
+.animate-form-true {
+    display: none;
+}
+
+.convertInput {
+    display: flex;
+    height: 100%;
+
+    justify-content: end;
+
+}
+
+.success.animate-true {
+    animation: submit-form-good 2s;
+}
+
+.fail.animate-true {
+    animation: submit-form-bad 2s;
+}
+
+.success {
+    font-size: 30px;
+}
+
+.fail {
+    font-size: 30px;
+}
+
+.animate-success-true {
+    visibility: visible;
+    animation: 2s fade-in;
+    font-size: 40px;
+    top: 50px;
+}
+
+.animate-success-false {
+    visibility: hidden;
+}
+
+.animate-fail-true {
+    visibility: visible;
+    animation: 2s fade-in;
+    font-size: 40px;
+    top: 50px;
+}
+
+.animate-fail-false {
+    visibility: hidden;
+}
+
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+@keyframes submit-form-good {
+    0% {
+        width: 100%;
+        transform: translateY(0);
+    }
+    8% {
+        width: 9%;
+        border-radius: 100px;
+        background-color: #5cb85c;
+        transform: translateY(-10px);
+    }
+    10% {
+        transform: translateY(0);
+    }  
+    80% {
+        transform: translate(0, -200px);
+    }   
+    90% {
+        transform: translate(0, -200px);
+    }   
+    100% {
+        width: 9%;
+        border-radius: 100px;
+        background-color: #5cb85c;
+        transform: translate(-300px, -200px);
+    }
+}
+
+@keyframes submit-form-bad {
+    0% {
+        width: 100%;
+        transform: translateY(0);
+    }
+    8% {
+        width: 9%;
+        border-radius: 100px;
+        background-color: #b85c5c;
+        transform: translateY(-10px);
+    }
+    10% {
+        transform: translateY(0);
+    }  
+    80% {
+        transform: translate(0, -200px);
+    }   
+    90% {
+        transform: translate(0, -200px);
+    }   
+    100% {
+        width: 9%;
+        border-radius: 100px;
+        background-color: #b85c5c;
+        transform: translate(0, 100px);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(200%);
+        opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+}

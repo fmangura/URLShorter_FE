@@ -15,9 +15,12 @@ class backend {
         const params = (method === "GET") ? data : {};
 
         try {
-            return (await axios({ url, method, data, params, headers })).data;
+            let res = await axios({ url, method, data, params, headers });
+            if (res.status != 200) throw res;
+            return res.data;
         } catch (err) {
             console.error("Backend API Error:", err.response);
+            return err.response.data;
         }
     }
 
@@ -55,20 +58,37 @@ class backend {
 
     static async convertLink(data) {
         try {
+            if (data.tag == '' && data.url) {
+                let rgx = '(?<=:\/\/|^)(?:[^@\/\n]+@)?(?:www\.)?(?:[a-zA-Z0-9-]+\.)*([a-zA-Z0-9-]+)(?=\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?)'
+                let root = tag.match(rgx);
+                data = {...data, tag:`${root}`};
+            }
             data = {...data, cookie: backend.session_cookie}
-            return await this.request(`/convert`, data, 'post').then((res) => {
-                const timeLeft = new Date(res.expiry) - Date.now();
-                res['expiry'] = Math.floor(timeLeft/1000);
-                return res
-            })
+            let res = await this.request(`/convert`, data, 'post');
+            if (res.error) throw res;
+            const timeLeft = new Date(res.expiry) - Date.now();
+            res['expiry'] = Math.floor(timeLeft/1000);
+
+            return res
         } catch (err) {
-            return err
+            return err;
         }
     }
 
     static async getRedirectLink(short) {
         try {
-            return await this.request(`/${short}`);
+            const link = await backend.request(`/${short}`);
+            return link;
+        } catch (err) {
+            console.log(err)
+            return err
+        }
+    }
+
+    static async delLink(link) {
+        try {
+            await backend.request(`/del/${link}`, {}, 'delete');
+            return await backend.getLinks();
         } catch (err) {
             return err
         }
